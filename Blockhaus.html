@@ -7,28 +7,30 @@
 <link rel="stylesheet" href="style.css">
 <script src="mobile-detect.js"></script>
 <style>
+/* Variables CSS */
 :root {
-    --banner-height: 0px; /* valeur par défaut */
-    --nav-height: 60px;   /* hauteur approximative de la nav */
+    --nav-height: 60px; /* hauteur approximative nav si existante */
 }
 
+/* Body */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    padding-top: calc(var(--nav-height) + 75px); /* espace pour le bandeau sticky */
 }
 
-/* BOUTONS EN HAUT */
+/* BOUTONS STICKY EN HAUT */
 .top-buttons {
     position: sticky;
-    top: calc(var(--banner-height) + var(--nav-height));
+    top: var(--nav-height); /* sous la nav */
+    background: white;
+    z-index: 1000;
     padding: 15px 0;
-    text-align: center;
-    z-index: 800;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .top-buttons button {
@@ -54,7 +56,7 @@ body {
 
 /* SECTIONS */
 .section {
-    margin-top: 20px;
+    margin: 20px;
     display: none;
 }
 
@@ -200,6 +202,7 @@ function searchBlockhaus() {
 </script>
 </body>
 </html>
+
 
 
 
