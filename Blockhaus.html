@@ -118,6 +118,9 @@ body {
 <body>
 <aside class="sidebar"></aside>
 
+<!-- PLACEMENT CORRECT DE navigation.js -->
+<script src="navigation.js"></script>
+
 <!-- BOUTONS DE NAVIGATION -->
 <div class="top-buttons">
     <button class="active" onclick="showSection('blockhaus', this)">Les Blockhaus</button>
@@ -190,8 +193,6 @@ body {
     </div>
 </div>
 
-<!-- JAVASCRIPT -->
-<script src="navigation.js"></script>
 <script>
 function showSection(sectionId, button) {
     document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
@@ -212,6 +213,7 @@ function searchBlockhaus() {
 </script>
 </body>
 </html>
+
 
 
 
