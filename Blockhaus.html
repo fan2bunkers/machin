@@ -7,22 +7,30 @@
 <link rel="stylesheet" href="style.css">
 <script src="mobile-detect.js"></script>
 <style>
-/* Variables CSS */
-:root {
-    --nav-height: 60px; /* hauteur approximative nav si existante */
-}
-
 /* Body */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    padding-top: calc(var(--nav-height) + 75px); /* espace pour le bandeau sticky */
+}
+
+/* Bandeau navigation (créé par navigation.js) */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #222;
+    color: white;
+    height: 60px; /* par défaut, sera ajusté dynamiquement si nécessaire */
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 900;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 /* BOUTONS STICKY EN HAUT */
 .top-buttons {
     position: sticky;
-    top: var(--nav-height); /* sous la nav */
     background: white;
     z-index: 1000;
     padding: 15px 0;
@@ -106,8 +114,10 @@ body {
 </style>
 </head>
 <body>
-<aside class="sidebar"></aside>
-<script src="navigation.js"></script>
+<!-- Bandeau navigation -->
+<header class="navbar">
+    <h1>LesBlockhausLyssois</h1>
+</header>
 
 <!-- BOUTONS -->
 <div class="top-buttons">
@@ -181,8 +191,21 @@ body {
     </div>
 </div>
 
-<!-- JAVASCRIPT -->
+<script src="navigation.js"></script>
 <script>
+/* Ajuste la position sticky des top-buttons en fonction de la nav */
+window.addEventListener('load', () => {
+    const nav = document.querySelector('.navbar');
+    const topButtons = document.querySelector('.top-buttons');
+    if(nav && topButtons){
+        const navHeight = nav.offsetHeight;
+        topButtons.style.top = navHeight + 'px';
+        // padding pour le body pour éviter chevauchement
+        document.body.style.paddingTop = (navHeight + topButtons.offsetHeight + 20) + 'px';
+    }
+});
+
+/* Fonction switch sections */
 function showSection(sectionId, button) {
     document.querySelectorAll(".section").forEach(sec => sec.style.display = "none");
     document.getElementById(sectionId).style.display = "block";
@@ -190,6 +213,7 @@ function showSection(sectionId, button) {
     button.classList.add("active");
 }
 
+/* Recherche blockhaus */
 function searchBlockhaus() {
     let input = document.getElementById("searchInput");
     let filter = input.value.toLowerCase();
@@ -202,7 +226,6 @@ function searchBlockhaus() {
 </script>
 </body>
 </html>
-
 
 
 
