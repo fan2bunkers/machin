@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cartes et Documents - LesBlockhausLyssois</title>
-
 <link rel="icon" type="image/png" href="https://i.postimg.cc/Y2g29xsg/Design-sans-titre-(30).png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartes et Documents - LesBlockhausLyssois</title>
+<link rel="stylesheet" href="style.css">
 <script src="mobile-detect.js"></script>
 <style>
 body {
@@ -134,10 +134,8 @@ body {
     <!-- Barre de recherche -->
     <div class="search-bar">
         <input type="text" id="searchInput" onkeyup="searchBlockhaus()" placeholder="Rechercher un blockhaus...">
+        <div id="searchResults" class="block-list" style="text-align:center; display:none;"></div>
     </div>
-
-    <!-- Conteneur pour les résultats filtrés -->
-    <div id="searchResults" class="block-list" style="text-align:center; display:none;"></div>
 
     <!-- Liste complète des blockhaus -->
     <div class="block-list" id="blockhausList" style="text-align:center;">
@@ -162,20 +160,13 @@ body {
         <a href="blockhaus/B298.html" target="_blank">Bloc du Vieux Sailly (B298) (Hem)</a><br>
         <a href="blockhaus/B299.html" target="_blank">Bloc de La Vallée (B299) (Hem)</a><br>
         <a href="blockhaus/B301.html" target="_blank">Bloc du Cambuis (B301) (Hem)</a><br>
-        <a href="blockhaus/BEF691.html" target="_blank">Pillbox du Gauquier Est (BEF 691) (Wattrelos)</a><br>
-        <a href="blockhaus/BEF348.html" target="_blank">Pillbox des Trieux de Carihem Est (BEF 348) (Leers)</a><br>
-        <a href="blockhaus/BEF687.html" target="_blank">Pillbox de la Boutillerie Nord(BEF 687) (Wattrelos)</a><br>
-        <a href="blockhaus/BEF689.html" target="_blank">Pillbox du Gauquier Ouest (BEF 689) (Wattrelos)</a><br>
-        <a href="blockhaus/BEF264.html" target="_blank">Pillbox du Risquons-Tout Ouest (BEF 264) (Tourcoing)</a><br>
-        <a href="blockhaus/BEF383.html" target="_blank">Pillbox de la pierre plate (BEF 383) (Bourghelles)</a><br>
-        <a href="blockhaus/cuvesbeaulieu.html" target="_blank">Cuves pour canons de Beaulieu (Wattrelos)</a><br>
     </div>
 </div>
 
 <!-- SECTION 2 : LES CARTES -->
 <div id="cartes" class="section">
     <h2>Les Cartes</h2>
-    <p><a href="https://docs.google.com/document/d/1Jzigg7uVxinlWrn8m_tWB7tfTqt_JpOJmFEapNo8b_Y/edit?usp=sharing" target="_blank">Comment utiliser nos cartes Google Earth ?</a></p>
+    <p><a href="https://docs.google.com/document/d/1Jzigg7uVxinlWrn8m_tWB7tfTqt_JpOJmFEapNo8b_Y/edit?usp=sharing">Comment utiliser nos cartes Google Earth ?</a></p>
     <p>Carte complète du secteur fortifié de Lille : <a href="https://earth.google.com/earth/d/1DS-_KW_HaaLBEMzQVbN8XJyOlxAXzmBk?usp=sharing" target="_blank">Voir la carte</a> (La carte met environ 1 minute à charger).</p>
     <div class="map-container">
         <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1vQL4sZPDyJNzkY-vYmDtjlVqJtbn9eM&ehbc=2E312F"></iframe>
@@ -203,7 +194,6 @@ body {
     </div>
 </div>
 
-<!-- JAVASCRIPT -->
 <script src="navigation.js"></script>
 <script>
 function showSection(sectionId, button) {
@@ -230,25 +220,19 @@ function searchBlockhaus() {
     resultsContainer.style.display = "block";
 
     let found = false;
-    for (let link of links) {
-        let txtValue = link.textContent || link.innerText;
+    for (let i = 0; i < links.length; i++) {
+        let txtValue = links[i].textContent || links[i].innerText;
         if (txtValue.toLowerCase().includes(input)) {
-            resultsContainer.appendChild(link.cloneNode(true));
+            resultsContainer.appendChild(links[i].cloneNode(true));
             found = true;
         }
     }
-
-    if (!found) {
-        resultsContainer.innerHTML = "<em>Aucun résultat trouvé.</em>";
-    }
+    if (!found) resultsContainer.innerHTML = "<em>Aucun résultat trouvé.</em>";
 }
 </script>
 
 </body>
 </html>
-
-
-
 
 
 
