@@ -16,23 +16,45 @@ html, body {
     height: 100%;
 }
 
+/* ===========================
+   BODY
+   =========================== */
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
 
-    /* Image de fond grisée et légèrement assombrie */
-    background: url("arriereplan.jpg") center / cover no-repeat;
+    /* Image de fond principale */
+    background: url("arriereplan.jpg") center / cover no-repeat fixed;
 }
 
-/* Pseudo-élément pour griser le fond sans toucher le contenu */
-body::before {
+/* ===========================
+   PAGE (contenu) avec overlay
+   =========================== */
+.page {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 50px;
+
+    /* Couche blanche semi-transparente pour le contenu */
+    background-color: rgba(255, 255, 255, 0.88);
+    overflow: hidden;
+}
+
+/* Overlay gris sur le fond */
+.page::before {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
-    background: url("arriereplan.jpg") center / cover no-repeat;
+    background: inherit; /* reprend le background du body */
     filter: grayscale(100%) brightness(70%);
-    z-index: -1; /* reste derrière tout le contenu */
+    z-index: 0; /* derrière tout le contenu de .page */
+}
+
+/* S'assurer que le contenu reste au-dessus de l'overlay */
+.page > * {
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -321,6 +343,7 @@ function searchBlockhaus() {
 
 </body>
 </html>
+
 
 
 
