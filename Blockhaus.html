@@ -25,16 +25,23 @@ body {
     position: relative;
 }
 
-/* ===========================
-   IMAGE DE FOND GRISÉE
-   =========================== */
+/* IMAGE DE FOND GRISÉE */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     background: url("background.webp") center / cover no-repeat;
-    filter: grayscale(100%) brightness(70%); /* rend l'image grisée et légèrement assombrie */
-    z-index: -1; /* reste derrière tout le contenu */
+    filter: grayscale(100%) brightness(90%); /* grisé et légèrement éclairci */
+    z-index: -2; /* derrière tout */
+}
+
+/* OVERLAY LÉGER POUR CONTRASTE */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.15); /* léger voile sombre */
+    z-index: -1; /* entre le fond et le contenu */
 }
 
 /* ===========================
@@ -44,9 +51,19 @@ body::before {
     position: relative;
     min-height: 100vh;
     padding-bottom: 50px;
-    background-color: rgba(255, 255, 255, 0.88); /* garde le texte lisible */
-    z-index: 1; /* au-dessus du pseudo-élément */
+
+    /* Fond semi-transparent pour rendre le texte lisible */
+    background-color: rgba(255, 255, 255, 0.85);
+
+    z-index: 0;
 }
+
+/* Assurer que le contenu reste au-dessus de l'overlay */
+.page > * {
+    position: relative;
+    z-index: 1;
+}
+
 
 
 
@@ -335,6 +352,7 @@ function searchBlockhaus() {
 
 </body>
 </html>
+
 
 
 
